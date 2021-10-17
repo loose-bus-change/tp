@@ -4,36 +4,50 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "isDone": false
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "remark" : "",
+    "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "isDone": false
+    "address" : "311, Clementi Ave 2, #02-25",
+    "remark" : "",
+    "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "isDone": false
+    "address" : "wall street",
+    "remark" : "",
+    "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "isDone": false
+    "address" : "10th street",
+    "remark" : "",
+    "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "isDone": false
+    "address" : "michegan ave",
+    "remark" : "",
+    "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "isDone": false
+    "address" : "little tokyo",
+    "remark" : "",
+    "tagged" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "isDone": false
+    "address" : "4th street",
+    "remark" : "",
+    "tagged" : [ ]
   } ]
 }

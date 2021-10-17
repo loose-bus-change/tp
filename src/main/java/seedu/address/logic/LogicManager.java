@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,7 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.storage.ImportExport;
 import seedu.address.storage.Storage;
 
 /**
@@ -29,16 +27,11 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final ImportExport importExportManager;
 
-    /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
-     */
-    public LogicManager(Model model, Storage storage, ImportExport importExportManager) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        this.importExportManager = importExportManager;
-        this.addressBookParser = new AddressBookParser();
+        addressBookParser = new AddressBookParser();
     }
 
     @Override
@@ -82,16 +75,4 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
-
-    @Override
-    public String importData() {
-        try {
-            importExportManager.importIntoAddressBook(model);
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (DataConversionException | IOException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-        }
-        return importExportManager.getImportStatus();
-    }
-
 }

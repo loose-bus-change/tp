@@ -47,9 +47,4 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
-    /**
-     * Import data from CSV
-     */
-    String importData();
 }

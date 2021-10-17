@@ -1,13 +1,9 @@
 package seedu.address.ui;
 
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -38,7 +34,6 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private String importStatus;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -55,9 +50,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    /**
-     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
-     */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
@@ -126,8 +118,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        resultDisplay.setFeedbackToUser(importStatus);
     }
 
     /**
@@ -154,12 +144,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Runs popupwindow to get import settings and showing of primary stage
-     *
-     */
     void show() {
-        importStatus = importCsvUserPrompt();
         primaryStage.show();
     }
 
@@ -205,25 +190,4 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
-    /**
-     * getting the user setting for excel import
-     *
-     */
-    private String importCsvUserPrompt() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("Do you want to import contacts from csv?");
-        alert.setContentText("There are " + logic.getFilteredPersonList().size() + " people currently in the "
-                + "addressbook");
-        ButtonType yesButton = new ButtonType("Import", ButtonBar.ButtonData.YES);
-        ButtonType noButton = new ButtonType("Don't import", ButtonBar.ButtonData.NO);
-        alert.getButtonTypes().setAll(yesButton, noButton);
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == yesButton) {
-            return logic.importData();
-        }
-        return "No additional import";
-    }
-
 }
