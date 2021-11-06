@@ -27,6 +27,6 @@ public class DisplayCommandParserTest {
     public void parse_tooBigInt_throwsParseException() {
         long l = 23423498233L;
         String input = String.valueOf(l);
-        assertParseFailure(parser, input, String.format(DisplayCommand.MESSAGE_INDEX_NOT_PARSED));
+        assertParseFailure(parser, input, String.format(DisplayCommandParser.MESSAGE_INDEX_NOT_PARSED));
     }
 }

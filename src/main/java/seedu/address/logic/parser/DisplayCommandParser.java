@@ -16,6 +16,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DisplayCommandParser implements Parser<DisplayCommand> {
 
+    public static final String MESSAGE_INDEX_NOT_PARSED = "The index entered is not within the allowed range. "
+            + "The index cannot be bigger than 2147483647 (i.e., MAX_VALUE).";
+
     /**
      * Parses the given {@code String} of argument and returns a DisplayCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
@@ -24,20 +27,15 @@ public class DisplayCommandParser implements Parser<DisplayCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
         List<String> argList = argMultimap.getAllValues(EMPTY_PREFIX);
-        String lastArgument = extractLastArgument(argList);
 
         Index index;
         try {
-            if (hasParameterValue(argList)) {
-                if (isWholeNumber(lastArgument)) {
-                    Integer.parseInt(lastArgument);
-                }
-            }
+            tryParseIndex(argList);
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE), ive);
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(DisplayCommand.MESSAGE_INDEX_NOT_PARSED), e);
+            throw new ParseException(String.format(MESSAGE_INDEX_NOT_PARSED), e);
         }
         return new DisplayCommand(index);
     }
@@ -80,5 +78,19 @@ public class DisplayCommandParser implements Parser<DisplayCommand> {
             }
         }
         return false;
+    }
+
+    /**
+     * Tries to parse the input of the user to get the integer index
+     * @param argList List that stores the user input
+     */
+    public void tryParseIndex(List<String> argList) throws NumberFormatException {
+        if (!hasParameterValue(argList)) {
+            return;
+        }
+        String lastArgument = extractLastArgument(argList);
+        if (isWholeNumber(lastArgument)) {
+            Integer.parseInt(lastArgument);
+        }
     }
 }

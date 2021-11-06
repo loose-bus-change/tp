@@ -63,11 +63,6 @@ public class FullPersonCard extends UiPart<Region> {
         super(FXML);
 
         fullPersonDetails.setPrefWidth(windowWidth / 3);
-        //cardPane.setPrefWidth(windowWidth / 3);
-
-        if (displayedIndex == 0) {
-            createEmptyCard();
-        }
 
         try {
             this.person = persons.get(displayedIndex - 1);
